@@ -62,65 +62,27 @@ module.exports = {
         const collector = await interaction.channel.createMessageComponentCollector({
             time: 60000
         })
-
+        let currentIndex = 0
         collector.on("collect", async i => {
             
             if (interaction.user.id !== i.user.id) return await i.reply({
                 content: 'You are not the author',
                 ephemeral: true
             })
-            if (page === 1){
-                await i.deferUpdate()
-                await i.editReply({
-                    embeds: [embeds[0]],
-                    components: [buttonRow]
-                })
-            }
-            if (page === 2){
-                await i.deferUpdate()
-                await i.editReply({
-                    embeds: [embeds[1]],
-                    components: [buttonRow]
-                })
-            }
-            if (page === 3){
-                await i.deferUpdate()
-                await i.editReply({
-                    embeds: [embeds[2]],
-                    components: [buttonRow]
-                })
-            }
-            if (page === 4){
-                await i.deferUpdate()
-                await i.editReply({
-                    embeds: [embeds[3]],
-                    components: [buttonRow]
-                })
-            }
-            if (page === 5){
-                await i.deferUpdate()
-                await i.editReply({
-                    embeds: [embeds[4]],
-                    components: [buttonRow]
-                })
-            }
-            if (i.isButton()) {
-                if (i.customId === 'prev_page_button'){
-                    if (page === 1){
-                        return
-                    }else{
-                    page -= 1;
-                    }
-                }
 
-                if (i.customId === 'next_page_button'){
-                    if (page === 5){
-                        return
-                    }else{
-                    page += 1;
-                    }
-                }
+            if (i.customId === 'prev_page_button') {
+                currentIndex === 0 ? currentIndex = embeds.length - 1 : currentIndex -= 1;
             }
+            if (i.customId === 'next_page_button') {
+                currentIndex === embeds.length - 1 ? currentIndex = 0 : currentIndex += 1;
+                
+            }
+
+            await i.update({
+                embeds: [embeds[currentIndex]],
+                components: [buttonRow]
+            })
+            
         
         })
 
