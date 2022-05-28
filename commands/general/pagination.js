@@ -3,7 +3,7 @@ module.exports = {
     data: {
         name: "pagination",
         description: "Demonstrates Pagination",
-        options: [],
+        Categorys: [],
     },
     timeout:60000,
     /**
@@ -22,7 +22,36 @@ module.exports = {
                     .setCustomId('next_page_button')
                     .setLabel('⏭')
                     .setStyle('PRIMARY')
-            )
+            );
+        
+        const selectMenuRow = new MessageActionRow()
+            .addComponents(
+                new MessageSelectMenu()
+                    .setCustomId('category_select_menu')
+                    .addCategorys([
+                        {
+                            label: 'Category 1',
+                            description: 'Category 1 desc',
+                            value: 'Category_1'
+                        },
+                        {
+                            label: 'Category 2',
+                            description: 'Category 2 desc',
+                            value: 'Category_2'
+                        },
+                        {
+                            label: 'Category 3',
+                            description: 'Category 3 desc',
+                            value: 'Category_3'
+                        },
+                        {
+                            label: 'Category 4',
+                            description: 'Category 4 desc',
+                            value: 'Category_4'
+                        }
+                    ]),
+
+                );
         
         const page_1_embed = new MessageEmbed()
                 .setColor('#0099ff')
@@ -69,6 +98,10 @@ module.exports = {
                 content: 'You are not the author',
                 ephemeral: true
             })
+
+            if (i.isSelectMenu()){
+                if (i.customId === )
+            }
 
             if (i.customId === 'prev_page_button') {
                 currentIndex === 0 ? currentIndex = embeds.length - 1 : currentIndex -= 1;
