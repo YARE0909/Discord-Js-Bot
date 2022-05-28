@@ -1,4 +1,4 @@
-const { Message, MessageActionRow, MessageSelectMenu, MessageButton, MessageEmbed, Collector } = require('discord.js');
+const { Message, MessageActionRow, MessageSelectMenu, MessageButton, MessageEmbed, Collector, SelectMenuInteraction } = require('discord.js');
 module.exports = {
     data: {
         name: "pagination",
@@ -28,7 +28,7 @@ module.exports = {
             .addComponents(
                 new MessageSelectMenu()
                     .setCustomId('category_select_menu')
-                    .addCategorys([
+                    .addOptions([
                         {
                             label: 'Category 1',
                             description: 'Category 1 desc',
@@ -43,48 +43,108 @@ module.exports = {
                             label: 'Category 3',
                             description: 'Category 3 desc',
                             value: 'Category_3'
-                        },
-                        {
-                            label: 'Category 4',
-                            description: 'Category 4 desc',
-                            value: 'Category_4'
                         }
                     ]),
 
                 );
         
-        const page_1_embed = new MessageEmbed()
+        const category_1_e1 = new MessageEmbed()
                 .setColor('#0099ff')
-                .setTitle('Page 1')
+                .setTitle('Category 1')
+                .setDescription('Page 1')
                 
             
-        const page_2_embed = new MessageEmbed()
+        const category_1_e2 = new MessageEmbed()
                 .setColor('#0099ff')
-                .setTitle('Page 2')
+                .setTitle('Category 1')
+                .setDescription('Page 2')
                 
             
-        const page_3_embed = new MessageEmbed()
+        const category_1_e3 = new MessageEmbed()
                 .setColor('#0099ff')
-                .setTitle('Page 3')
+                .setTitle('Category 1')
+                .setDescription('Page 3')
                 
 
-        const page_4_embed = new MessageEmbed()
+        const category_1_e4 = new MessageEmbed()
                 .setColor('#0099ff')
-                .setTitle('Page 4')
+                .setTitle('Category 1')
+                .setDescription('Page 4')
                 
         
-        const page_5_embed = new MessageEmbed()
+        const category_1_e5 = new MessageEmbed()
                 .setColor('#0099ff')
-                .setTitle('Page 5')
+                .setTitle('Category 2')
+                .setDescription('Page 5')
+
+
+        const category_2_e1 = new MessageEmbed()
+                .setColor('#0099ff')
+                .setTitle('Category 2')
+                .setDescription('Page 1')
+                
+            
+        const category_2_e2 = new MessageEmbed()
+                .setColor('#0099ff')
+                .setTitle('Category 2')
+                .setDescription('Page 2')
+                
+            
+        const category_2_e3 = new MessageEmbed()
+                .setColor('#0099ff')
+                .setTitle('Category 2')
+                .setDescription('Page 3')
                 
 
-        const embeds = [page_1_embed, page_2_embed, page_3_embed, page_4_embed, page_5_embed]
+        const category_2_e4 = new MessageEmbed()
+                .setColor('#0099ff')
+                .setTitle('Category 2')
+                .setDescription('Page 4')
+                
+        
+        const category_2_e5 = new MessageEmbed()
+                .setColor('#0099ff')
+                .setTitle('Category 2')
+                .setDescription('Page 5')
+        
 
-        let page = 1;
+        const category_3_e1 = new MessageEmbed()
+                .setColor('#0099ff')
+                .setTitle('Category 3')
+                .setDescription('Page 1')
+                
+            
+        const category_3_e2 = new MessageEmbed()
+                .setColor('#0099ff')
+                .setTitle('Category 3')
+                .setDescription('Page 2')
+                
+            
+        const category_3_e3 = new MessageEmbed()
+                .setColor('#0099ff')
+                .setTitle('Category 3')
+                .setDescription('Page 3')
+                
+
+        const category_3_e4 = new MessageEmbed()
+                .setColor('#0099ff')
+                .setTitle('Category 3')
+                .setDescription('Page 4')
+                
+        
+        const category_3_e5 = new MessageEmbed()
+                .setColor('#0099ff')
+                .setTitle('Category 3')
+                .setDescription('Page 5')
+        
+                
+
+        let embeds = [category_1_e1, category_1_e2, category_1_e3, category_1_e4, category_1_e5];
+
 
         await interaction.reply({
             embeds: [embeds[0]],
-            components: [buttonRow]
+            components: [selectMenuRow, buttonRow]
         })
 
 
@@ -100,7 +160,27 @@ module.exports = {
             })
 
             if (i.isSelectMenu()){
-                if (i.customId === )
+                if (i.customId === 'category_select_menu'){
+                    if (i.values[0]){
+                        embeds = [category_1_e1, category_1_e2, category_1_e3, category_1_e4, category_1_e5];
+                        
+                    }
+                    if (i.values[1]){
+                        embeds = [category_2_e1, category_2_e2, category_2_e3, category_2_e4, category_2_e5];
+                        
+                    }
+                    if (i.values[2]){
+                        embeds = [category_3_e1, category_3_e2, category_3_e3, category_3_e4, category_3_e5];
+                        
+                    }
+
+                await i.update({
+                    embeds: [embeds[0]],
+                    components: [selectMenuRow, buttonRow]
+                })
+
+                }
+
             }
 
             if (i.customId === 'prev_page_button') {
@@ -113,7 +193,7 @@ module.exports = {
 
             await i.update({
                 embeds: [embeds[currentIndex]],
-                components: [buttonRow]
+                components: [selectMenuRow, buttonRow]
             })
             
         
