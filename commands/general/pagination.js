@@ -10,10 +10,9 @@ const {
 module.exports = {
     data: {
         name: "pagination",
-        description: "Demonstrates Pagination",
-        Categorys: [],
+        description: "Demonstrates Pagination"
     },
-    timeout: 60000,
+    timeout: 5000,
     /**
      * @param {Discord.Client} client
      * @param {Discord.CommandInteraction} interaction
@@ -148,19 +147,19 @@ module.exports = {
 
         let embeds_no = [category_1_e1, category_1_e2, category_1_e3, category_1_e4, category_1_e5];
 
-        await interaction.reply({
+        let msg = await interaction.reply({
             embeds: [embeds_no[0]],
-            components: [selectMenuRow, buttonRow]
+            components: [selectMenuRow, buttonRow],
+            fetchReply: true
         })
 
         let embeds = [category_1_e1, category_1_e2, category_1_e3, category_1_e4, category_1_e5];
 
-        const collector = await interaction.channel.createMessageComponentCollector({
+        const collector = msg.createMessageComponentCollector({
             time: 60000
         })
         let currentIndex = 0
         collector.on("collect", async i => {
-
             if (interaction.user.id !== i.user.id) return await i.reply({
                 content: 'You are not the author',
                 ephemeral: true
@@ -203,6 +202,15 @@ module.exports = {
             })
 
 
+        })
+
+        collector.on('end', async (_) => {
+            console.log('ended')
+
+
+            // await interaction.editReply({
+            //     components: components.components[0].map(x => x.setDisabled(true))
+            // })
         })
 
     }

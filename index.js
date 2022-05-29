@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const token = require('./config.json')
+const config = require('./config.json')
 const { readdirSync } = require('fs');
 const { join } = require('path');
 
@@ -28,4 +28,4 @@ for (let i = 0; i < client.categories.length; i++) {
     }
 }
 
-client.login(token.token);
+client.login(config.token);
