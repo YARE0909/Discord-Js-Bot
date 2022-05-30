@@ -180,7 +180,7 @@ module.exports = {
                     if (i.values[0] == 'Category_3') {
                         embeds = [category_3_e1, category_3_e2, category_3_e3, category_3_e4, category_3_e5];
 
-                        
+
                     }
 
                 }
@@ -192,7 +192,7 @@ module.exports = {
                 }
                 if (i.customId === 'next_page_button') {
                     currentIndex === embeds.length - 1 ? currentIndex = 0 : currentIndex += 1;
-    
+
                 }
             }
 
@@ -207,10 +207,6 @@ module.exports = {
         collector.on('end', async (_) => {
             console.log('ended')
 
-
-            // await interaction.editReply({
-            //     components: components.components[0].map(x => x.setDisabled(true))
-            // })
         })
 
     }
