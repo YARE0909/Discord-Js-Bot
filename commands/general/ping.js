@@ -15,7 +15,7 @@ module.exports = {
             embeds: [
                 {
                     title: 'Ping!',
-                    description: `Latency is ${client.ws.ping}`,
+                    description: `Latency is ${client.ws.ping}ms`,
                     color: '696969'
                 }
             ],

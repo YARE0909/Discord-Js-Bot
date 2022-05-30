@@ -14,6 +14,10 @@ const {
             type: 3,
             required: true
     }],
+    /**
+     * @param {Discord.Client} client
+     * @param {Discord.CommandInteraction} interaction
+     */
     run: async (client, interaction, args) => {
         const nembed = new MessageEmbed()
             .setTitle("EVAL").setColor("RANDOM")
@@ -63,6 +67,5 @@ const {
                 content: `An error occurred : \`${e.message}\``
             });
         }
-
     }
 }
